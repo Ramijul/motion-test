@@ -1,0 +1,9 @@
+.env
+.eslintignore
+.eslintrc.json
+.prettierrc.json
+Dockerfile
+jest.config.json
+README.md
+**/node_modules/
+**/dist
