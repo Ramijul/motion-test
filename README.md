@@ -9,7 +9,7 @@ With docker:
 
   ```
   docker build -t motion-test-rami .
-  docker run -e FB_TOKEN=<TOKEN> motion-test-rami
+  docker run -it -e FB_TOKEN=<TOKEN> motion-test-rami
   ```
 
 Terminal (without docker):
