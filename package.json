@@ -5,6 +5,7 @@
   "author": "Ramijul Islam",
   "license": "MIT",
   "dependencies": {
+    "dotenv": "^16.4.5",
     "typescript": "^5.4.3"
   },
   "devDependencies": {
