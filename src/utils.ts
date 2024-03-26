@@ -67,7 +67,7 @@ export async function getBackoff(resp: Response): Promise<number | null> {
   let backoff: number | null = 2000; // backoff set to 2 seconds by default
 
   const appUsage: IAppUsage = JSON.parse(resp.headers.get('x-app-usage') as string);
-  console.log(appUsage);
+  //   console.log(appUsage);
 
   // handle errors
   if (resp.status !== 200) {
