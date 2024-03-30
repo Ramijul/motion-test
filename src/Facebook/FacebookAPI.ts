@@ -7,6 +7,7 @@ export class FacebookAPI {
 
   constructor() {
     this.ACCESS_TOKEN = process.env.FB_TOKEN as string;
+
     if (!this.ACCESS_TOKEN?.length) {
       throw new Error('Access Token is missing');
     }

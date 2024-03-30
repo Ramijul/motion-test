@@ -1,5 +1,6 @@
 import { sleep } from '../utils';
 import AppUsage from './AppUsage';
+import { RateLimitError } from './RateLimitError';
 import { IAppUsage, MetaApiErrorResponse } from './types';
 
 export class RequestHandler {
@@ -21,7 +22,7 @@ export class RequestHandler {
     if (resp.status !== 200) {
       // rate limit reached
       if (AppUsage.hasApiLimitReached()) {
-        throw new Error('rate limit');
+        throw new RateLimitError('Rate limit has been reached. Pausing api calls till the start of the next hour.');
       }
 
       // other errors
