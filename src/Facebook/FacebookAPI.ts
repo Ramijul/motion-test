@@ -6,13 +6,13 @@ export class FacebookAPI {
   private ACCESS_TOKEN: string;
   private requestHandler: typeof RequestHandler;
 
-  constructor(requesthandler: typeof RequestHandler = RequestHandler) {
+  constructor(requestHandler: typeof RequestHandler = RequestHandler) {
     this.ACCESS_TOKEN = process.env.FB_TOKEN as string;
 
     if (!this.ACCESS_TOKEN?.length) {
       throw new Error('Access Token is missing');
     }
-    this.requestHandler = requesthandler;
+    this.requestHandler = requestHandler;
   }
 
   /**
