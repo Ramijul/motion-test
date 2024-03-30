@@ -1,7 +1,8 @@
 import { sleep } from '../utils';
+import { ApiLimitProcessor } from './ApiLimitProcessor';
+import AppUsageStore from './AppUsageStore';
 import { RateLimitError } from './RateLimitError';
 import { IAppUsage, MetaApiErrorResponse } from './types';
-import RateLimitMonitor from './RateLimitMonitor';
 
 export class RequestHandler {
   /**
@@ -11,10 +12,10 @@ export class RequestHandler {
    * @returns
    */
   static async fetchData(endpoint: string): Promise<Record<string, any>> {
-    await sleep(RateLimitMonitor.getBackoff());
+    await sleep(ApiLimitProcessor.getBackoff(AppUsageStore.getAppUsage()));
 
     const resp = await fetch(endpoint);
-    RateLimitMonitor.setAppUsage(JSON.parse(resp.headers.get('x-app-usage') as string) as IAppUsage);
+    AppUsageStore.setAppUsage(JSON.parse(resp.headers.get('x-app-usage') as string) as IAppUsage);
 
     // handle error
     if (resp.status !== 200) {
@@ -31,7 +32,7 @@ export class RequestHandler {
 
   private static async handleErrors(resp: Response) {
     // rate limit reached
-    if (RateLimitMonitor.hasApiLimitReached()) {
+    if (ApiLimitProcessor.hasApiLimitReached(AppUsageStore.getAppUsage())) {
       throw new RateLimitError('Rate limit has been reached. Pausing api calls till the start of the next hour.');
     }
 
