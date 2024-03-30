@@ -24,7 +24,7 @@ class RateLimitMonitor {
     return this.appUsage;
   }
 
-  setAppUsage(appUsage: IAppUsage) {
+  setAppUsage(appUsage: IAppUsage | null) {
     this.appUsage = appUsage;
   }
 
