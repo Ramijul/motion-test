@@ -1,6 +1,9 @@
 import { msToNextHour } from '../utils';
 import { IAppUsage } from './types';
 
+/**
+ * Singleton to share AppUsage stats between api calls
+ */
 class AppUsage {
   private usage: IAppUsage | null;
   private readonly defaultBackoff = 2000;
@@ -29,6 +32,7 @@ class AppUsage {
     if (this.hasApiLimitReached()) {
       return msToNextHour();
     }
+    // if nearing limit double the backoff to reduce the rate
     if (this.isNearingApiLimit()) {
       return this.defaultBackoff * 2;
     }
