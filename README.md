@@ -29,3 +29,4 @@ Terminal (without docker):
 - A preemptive approach has been implemented, where after each api call, the header is inspected - if app usage exceeds 95%, the backoff is doubled to 4 seconds till the usage drops.
 - In case of throttling, the next api call will be scheduled to the start of the next hour.
 - App has been containerized to allow running on any environment, and possibly running multiple instances.
+- **An alternative implementation is available using OOP principles. It can be found on the [oop-approach](https://github.com/Ramijul/motion-test/tree/oop-approach) branch**
